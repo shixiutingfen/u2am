@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiuling.web.dao.PersonResultMapper">
+  <resultMap id="BaseResultMap" type="com.jiuling.web.model.PersonResult">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="serialnumber" jdbcType="VARCHAR" property="serialnumber" />
+    <result column="cameraid" jdbcType="BIGINT" property="cameraid" />
+    <result column="imgurl" jdbcType="VARCHAR" property="imgurl" />
+    <result column="bigimgurl" jdbcType="VARCHAR" property="bigimgurl" />
+    <result column="objtype" jdbcType="SMALLINT" property="objtype" />
+    <result column="frmidx" jdbcType="VARCHAR" property="frmidx" />
+    <result column="pos" jdbcType="VARCHAR" property="pos" />
+    <result column="head_pos" jdbcType="VARCHAR" property="headPos" />
+    <result column="upperbody_pos" jdbcType="VARCHAR" property="upperbodyPos" />
+    <result column="enlargePos" jdbcType="VARCHAR" property="enlargepos" />
+    <result column="uppercolor" jdbcType="VARCHAR" property="uppercolor" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="age" jdbcType="TINYINT" property="age" />
+    <result column="wheels" jdbcType="TINYINT" property="wheels" />
+    <result column="backpack" jdbcType="TINYINT" property="backpack" />
+    <result column="glasses" jdbcType="TINYINT" property="glasses" />
+    <result column="umbrella" jdbcType="TINYINT" property="umbrella" />
+    <result column="angle" jdbcType="SMALLINT" property="angle" />
+    <result column="carryingbag" jdbcType="TINYINT" property="carryingbag" />
+    <result column="distance" jdbcType="REAL" property="distance" />
+    <result column="lam_shape" jdbcType="SMALLINT" property="lamShape" />
+    <result column="bike_has_plate" jdbcType="TINYINT" property="bikeHasPlate" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="inserttime" jdbcType="TIMESTAMP" property="inserttime" />
+    <result column="upperclothing" jdbcType="VARCHAR" property="upperclothing" />
+    <result column="trousers_style" jdbcType="VARCHAR" property="trousersStyle" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.jiuling.web.model.PersonResult">
+    <result column="bike_feature_json" jdbcType="LONGVARCHAR" property="bikeFeatureJson" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, serialnumber, cameraid, imgurl, bigimgurl, objtype, frmidx, pos, head_pos, upperbody_pos, 
+    enlargePos, uppercolor, gender, age, wheels, backpack, glasses, umbrella, angle, 
+    carryingbag, distance, lam_shape, bike_has_plate, createtime, inserttime, upperclothing, 
+    trousers_style
+  </sql>
+  <sql id="Blob_Column_List">
+    bike_feature_json
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.jiuling.web.model.PersonResultExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from person_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.jiuling.web.model.PersonResultExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from person_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from person_result
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from person_result
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jiuling.web.model.PersonResultExample">
+    delete from person_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jiuling.web.model.PersonResult">
+    insert into person_result (id, serialnumber, cameraid, 
+      imgurl, bigimgurl, objtype, 
+      frmidx, pos, head_pos, 
+      upperbody_pos, enlargePos, uppercolor, 
+      gender, age, wheels, 
+      backpack, glasses, umbrella, 
+      angle, carryingbag, distance, 
+      lam_shape, bike_has_plate, createtime, 
+      inserttime, upperclothing, trousers_style, 
+      bike_feature_json)
+    values (#{id,jdbcType=BIGINT}, #{serialnumber,jdbcType=VARCHAR}, #{cameraid,jdbcType=BIGINT}, 
+      #{imgurl,jdbcType=VARCHAR}, #{bigimgurl,jdbcType=VARCHAR}, #{objtype,jdbcType=SMALLINT}, 
+      #{frmidx,jdbcType=VARCHAR}, #{pos,jdbcType=VARCHAR}, #{headPos,jdbcType=VARCHAR}, 
+      #{upperbodyPos,jdbcType=VARCHAR}, #{enlargepos,jdbcType=VARCHAR}, #{uppercolor,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=TINYINT}, #{age,jdbcType=TINYINT}, #{wheels,jdbcType=TINYINT}, 
+      #{backpack,jdbcType=TINYINT}, #{glasses,jdbcType=TINYINT}, #{umbrella,jdbcType=TINYINT}, 
+      #{angle,jdbcType=SMALLINT}, #{carryingbag,jdbcType=TINYINT}, #{distance,jdbcType=REAL}, 
+      #{lamShape,jdbcType=SMALLINT}, #{bikeHasPlate,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{inserttime,jdbcType=TIMESTAMP}, #{upperclothing,jdbcType=VARCHAR}, #{trousersStyle,jdbcType=VARCHAR}, 
+      #{bikeFeatureJson,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiuling.web.model.PersonResult">
+    insert into person_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="serialnumber != null">
+        serialnumber,
+      </if>
+      <if test="cameraid != null">
+        cameraid,
+      </if>
+      <if test="imgurl != null">
+        imgurl,
+      </if>
+      <if test="bigimgurl != null">
+        bigimgurl,
+      </if>
+      <if test="objtype != null">
+        objtype,
+      </if>
+      <if test="frmidx != null">
+        frmidx,
+      </if>
+      <if test="pos != null">
+        pos,
+      </if>
+      <if test="headPos != null">
+        head_pos,
+      </if>
+      <if test="upperbodyPos != null">
+        upperbody_pos,
+      </if>
+      <if test="enlargepos != null">
+        enlargePos,
+      </if>
+      <if test="uppercolor != null">
+        uppercolor,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="wheels != null">
+        wheels,
+      </if>
+      <if test="backpack != null">
+        backpack,
+      </if>
+      <if test="glasses != null">
+        glasses,
+      </if>
+      <if test="umbrella != null">
+        umbrella,
+      </if>
+      <if test="angle != null">
+        angle,
+      </if>
+      <if test="carryingbag != null">
+        carryingbag,
+      </if>
+      <if test="distance != null">
+        distance,
+      </if>
+      <if test="lamShape != null">
+        lam_shape,
+      </if>
+      <if test="bikeHasPlate != null">
+        bike_has_plate,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="inserttime != null">
+        inserttime,
+      </if>
+      <if test="upperclothing != null">
+        upperclothing,
+      </if>
+      <if test="trousersStyle != null">
+        trousers_style,
+      </if>
+      <if test="bikeFeatureJson != null">
+        bike_feature_json,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="serialnumber != null">
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraid != null">
+        #{cameraid,jdbcType=BIGINT},
+      </if>
+      <if test="imgurl != null">
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="bigimgurl != null">
+        #{bigimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="objtype != null">
+        #{objtype,jdbcType=SMALLINT},
+      </if>
+      <if test="frmidx != null">
+        #{frmidx,jdbcType=VARCHAR},
+      </if>
+      <if test="pos != null">
+        #{pos,jdbcType=VARCHAR},
+      </if>
+      <if test="headPos != null">
+        #{headPos,jdbcType=VARCHAR},
+      </if>
+      <if test="upperbodyPos != null">
+        #{upperbodyPos,jdbcType=VARCHAR},
+      </if>
+      <if test="enlargepos != null">
+        #{enlargepos,jdbcType=VARCHAR},
+      </if>
+      <if test="uppercolor != null">
+        #{uppercolor,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=TINYINT},
+      </if>
+      <if test="wheels != null">
+        #{wheels,jdbcType=TINYINT},
+      </if>
+      <if test="backpack != null">
+        #{backpack,jdbcType=TINYINT},
+      </if>
+      <if test="glasses != null">
+        #{glasses,jdbcType=TINYINT},
+      </if>
+      <if test="umbrella != null">
+        #{umbrella,jdbcType=TINYINT},
+      </if>
+      <if test="angle != null">
+        #{angle,jdbcType=SMALLINT},
+      </if>
+      <if test="carryingbag != null">
+        #{carryingbag,jdbcType=TINYINT},
+      </if>
+      <if test="distance != null">
+        #{distance,jdbcType=REAL},
+      </if>
+      <if test="lamShape != null">
+        #{lamShape,jdbcType=SMALLINT},
+      </if>
+      <if test="bikeHasPlate != null">
+        #{bikeHasPlate,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inserttime != null">
+        #{inserttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upperclothing != null">
+        #{upperclothing,jdbcType=VARCHAR},
+      </if>
+      <if test="trousersStyle != null">
+        #{trousersStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="bikeFeatureJson != null">
+        #{bikeFeatureJson,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jiuling.web.model.PersonResultExample" resultType="java.lang.Long">
+    select count(*) from person_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update person_result
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.serialnumber != null">
+        serialnumber = #{record.serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraid != null">
+        cameraid = #{record.cameraid,jdbcType=BIGINT},
+      </if>
+      <if test="record.imgurl != null">
+        imgurl = #{record.imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigimgurl != null">
+        bigimgurl = #{record.bigimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objtype != null">
+        objtype = #{record.objtype,jdbcType=SMALLINT},
+      </if>
+      <if test="record.frmidx != null">
+        frmidx = #{record.frmidx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pos != null">
+        pos = #{record.pos,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headPos != null">
+        head_pos = #{record.headPos,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upperbodyPos != null">
+        upperbody_pos = #{record.upperbodyPos,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enlargepos != null">
+        enlargePos = #{record.enlargepos,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uppercolor != null">
+        uppercolor = #{record.uppercolor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=TINYINT},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=TINYINT},
+      </if>
+      <if test="record.wheels != null">
+        wheels = #{record.wheels,jdbcType=TINYINT},
+      </if>
+      <if test="record.backpack != null">
+        backpack = #{record.backpack,jdbcType=TINYINT},
+      </if>
+      <if test="record.glasses != null">
+        glasses = #{record.glasses,jdbcType=TINYINT},
+      </if>
+      <if test="record.umbrella != null">
+        umbrella = #{record.umbrella,jdbcType=TINYINT},
+      </if>
+      <if test="record.angle != null">
+        angle = #{record.angle,jdbcType=SMALLINT},
+      </if>
+      <if test="record.carryingbag != null">
+        carryingbag = #{record.carryingbag,jdbcType=TINYINT},
+      </if>
+      <if test="record.distance != null">
+        distance = #{record.distance,jdbcType=REAL},
+      </if>
+      <if test="record.lamShape != null">
+        lam_shape = #{record.lamShape,jdbcType=SMALLINT},
+      </if>
+      <if test="record.bikeHasPlate != null">
+        bike_has_plate = #{record.bikeHasPlate,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inserttime != null">
+        inserttime = #{record.inserttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.upperclothing != null">
+        upperclothing = #{record.upperclothing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trousersStyle != null">
+        trousers_style = #{record.trousersStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bikeFeatureJson != null">
+        bike_feature_json = #{record.bikeFeatureJson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update person_result
+    set id = #{record.id,jdbcType=BIGINT},
+      serialnumber = #{record.serialnumber,jdbcType=VARCHAR},
+      cameraid = #{record.cameraid,jdbcType=BIGINT},
+      imgurl = #{record.imgurl,jdbcType=VARCHAR},
+      bigimgurl = #{record.bigimgurl,jdbcType=VARCHAR},
+      objtype = #{record.objtype,jdbcType=SMALLINT},
+      frmidx = #{record.frmidx,jdbcType=VARCHAR},
+      pos = #{record.pos,jdbcType=VARCHAR},
+      head_pos = #{record.headPos,jdbcType=VARCHAR},
+      upperbody_pos = #{record.upperbodyPos,jdbcType=VARCHAR},
+      enlargePos = #{record.enlargepos,jdbcType=VARCHAR},
+      uppercolor = #{record.uppercolor,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=TINYINT},
+      age = #{record.age,jdbcType=TINYINT},
+      wheels = #{record.wheels,jdbcType=TINYINT},
+      backpack = #{record.backpack,jdbcType=TINYINT},
+      glasses = #{record.glasses,jdbcType=TINYINT},
+      umbrella = #{record.umbrella,jdbcType=TINYINT},
+      angle = #{record.angle,jdbcType=SMALLINT},
+      carryingbag = #{record.carryingbag,jdbcType=TINYINT},
+      distance = #{record.distance,jdbcType=REAL},
+      lam_shape = #{record.lamShape,jdbcType=SMALLINT},
+      bike_has_plate = #{record.bikeHasPlate,jdbcType=TINYINT},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      inserttime = #{record.inserttime,jdbcType=TIMESTAMP},
+      upperclothing = #{record.upperclothing,jdbcType=VARCHAR},
+      trousers_style = #{record.trousersStyle,jdbcType=VARCHAR},
+      bike_feature_json = #{record.bikeFeatureJson,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update person_result
+    set id = #{record.id,jdbcType=BIGINT},
+      serialnumber = #{record.serialnumber,jdbcType=VARCHAR},
+      cameraid = #{record.cameraid,jdbcType=BIGINT},
+      imgurl = #{record.imgurl,jdbcType=VARCHAR},
+      bigimgurl = #{record.bigimgurl,jdbcType=VARCHAR},
+      objtype = #{record.objtype,jdbcType=SMALLINT},
+      frmidx = #{record.frmidx,jdbcType=VARCHAR},
+      pos = #{record.pos,jdbcType=VARCHAR},
+      head_pos = #{record.headPos,jdbcType=VARCHAR},
+      upperbody_pos = #{record.upperbodyPos,jdbcType=VARCHAR},
+      enlargePos = #{record.enlargepos,jdbcType=VARCHAR},
+      uppercolor = #{record.uppercolor,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=TINYINT},
+      age = #{record.age,jdbcType=TINYINT},
+      wheels = #{record.wheels,jdbcType=TINYINT},
+      backpack = #{record.backpack,jdbcType=TINYINT},
+      glasses = #{record.glasses,jdbcType=TINYINT},
+      umbrella = #{record.umbrella,jdbcType=TINYINT},
+      angle = #{record.angle,jdbcType=SMALLINT},
+      carryingbag = #{record.carryingbag,jdbcType=TINYINT},
+      distance = #{record.distance,jdbcType=REAL},
+      lam_shape = #{record.lamShape,jdbcType=SMALLINT},
+      bike_has_plate = #{record.bikeHasPlate,jdbcType=TINYINT},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      inserttime = #{record.inserttime,jdbcType=TIMESTAMP},
+      upperclothing = #{record.upperclothing,jdbcType=VARCHAR},
+      trousers_style = #{record.trousersStyle,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiuling.web.model.PersonResult">
+    update person_result
+    <set>
+      <if test="serialnumber != null">
+        serialnumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraid != null">
+        cameraid = #{cameraid,jdbcType=BIGINT},
+      </if>
+      <if test="imgurl != null">
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="bigimgurl != null">
+        bigimgurl = #{bigimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="objtype != null">
+        objtype = #{objtype,jdbcType=SMALLINT},
+      </if>
+      <if test="frmidx != null">
+        frmidx = #{frmidx,jdbcType=VARCHAR},
+      </if>
+      <if test="pos != null">
+        pos = #{pos,jdbcType=VARCHAR},
+      </if>
+      <if test="headPos != null">
+        head_pos = #{headPos,jdbcType=VARCHAR},
+      </if>
+      <if test="upperbodyPos != null">
+        upperbody_pos = #{upperbodyPos,jdbcType=VARCHAR},
+      </if>
+      <if test="enlargepos != null">
+        enlargePos = #{enlargepos,jdbcType=VARCHAR},
+      </if>
+      <if test="uppercolor != null">
+        uppercolor = #{uppercolor,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="wheels != null">
+        wheels = #{wheels,jdbcType=TINYINT},
+      </if>
+      <if test="backpack != null">
+        backpack = #{backpack,jdbcType=TINYINT},
+      </if>
+      <if test="glasses != null">
+        glasses = #{glasses,jdbcType=TINYINT},
+      </if>
+      <if test="umbrella != null">
+        umbrella = #{umbrella,jdbcType=TINYINT},
+      </if>
+      <if test="angle != null">
+        angle = #{angle,jdbcType=SMALLINT},
+      </if>
+      <if test="carryingbag != null">
+        carryingbag = #{carryingbag,jdbcType=TINYINT},
+      </if>
+      <if test="distance != null">
+        distance = #{distance,jdbcType=REAL},
+      </if>
+      <if test="lamShape != null">
+        lam_shape = #{lamShape,jdbcType=SMALLINT},
+      </if>
+      <if test="bikeHasPlate != null">
+        bike_has_plate = #{bikeHasPlate,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inserttime != null">
+        inserttime = #{inserttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upperclothing != null">
+        upperclothing = #{upperclothing,jdbcType=VARCHAR},
+      </if>
+      <if test="trousersStyle != null">
+        trousers_style = #{trousersStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="bikeFeatureJson != null">
+        bike_feature_json = #{bikeFeatureJson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jiuling.web.model.PersonResult">
+    update person_result
+    set serialnumber = #{serialnumber,jdbcType=VARCHAR},
+      cameraid = #{cameraid,jdbcType=BIGINT},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      bigimgurl = #{bigimgurl,jdbcType=VARCHAR},
+      objtype = #{objtype,jdbcType=SMALLINT},
+      frmidx = #{frmidx,jdbcType=VARCHAR},
+      pos = #{pos,jdbcType=VARCHAR},
+      head_pos = #{headPos,jdbcType=VARCHAR},
+      upperbody_pos = #{upperbodyPos,jdbcType=VARCHAR},
+      enlargePos = #{enlargepos,jdbcType=VARCHAR},
+      uppercolor = #{uppercolor,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=TINYINT},
+      age = #{age,jdbcType=TINYINT},
+      wheels = #{wheels,jdbcType=TINYINT},
+      backpack = #{backpack,jdbcType=TINYINT},
+      glasses = #{glasses,jdbcType=TINYINT},
+      umbrella = #{umbrella,jdbcType=TINYINT},
+      angle = #{angle,jdbcType=SMALLINT},
+      carryingbag = #{carryingbag,jdbcType=TINYINT},
+      distance = #{distance,jdbcType=REAL},
+      lam_shape = #{lamShape,jdbcType=SMALLINT},
+      bike_has_plate = #{bikeHasPlate,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      inserttime = #{inserttime,jdbcType=TIMESTAMP},
+      upperclothing = #{upperclothing,jdbcType=VARCHAR},
+      trousers_style = #{trousersStyle,jdbcType=VARCHAR},
+      bike_feature_json = #{bikeFeatureJson,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiuling.web.model.PersonResult">
+    update person_result
+    set serialnumber = #{serialnumber,jdbcType=VARCHAR},
+      cameraid = #{cameraid,jdbcType=BIGINT},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      bigimgurl = #{bigimgurl,jdbcType=VARCHAR},
+      objtype = #{objtype,jdbcType=SMALLINT},
+      frmidx = #{frmidx,jdbcType=VARCHAR},
+      pos = #{pos,jdbcType=VARCHAR},
+      head_pos = #{headPos,jdbcType=VARCHAR},
+      upperbody_pos = #{upperbodyPos,jdbcType=VARCHAR},
+      enlargePos = #{enlargepos,jdbcType=VARCHAR},
+      uppercolor = #{uppercolor,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=TINYINT},
+      age = #{age,jdbcType=TINYINT},
+      wheels = #{wheels,jdbcType=TINYINT},
+      backpack = #{backpack,jdbcType=TINYINT},
+      glasses = #{glasses,jdbcType=TINYINT},
+      umbrella = #{umbrella,jdbcType=TINYINT},
+      angle = #{angle,jdbcType=SMALLINT},
+      carryingbag = #{carryingbag,jdbcType=TINYINT},
+      distance = #{distance,jdbcType=REAL},
+      lam_shape = #{lamShape,jdbcType=SMALLINT},
+      bike_has_plate = #{bikeHasPlate,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      inserttime = #{inserttime,jdbcType=TIMESTAMP},
+      upperclothing = #{upperclothing,jdbcType=VARCHAR},
+      trousers_style = #{trousersStyle,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

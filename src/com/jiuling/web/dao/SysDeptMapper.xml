@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiuling.web.dao.SysDeptMapper" >
+  <resultMap id="BaseResultMap" type="com.jiuling.web.model.SysDept" >
+    <id column="dept_id" property="deptId" jdbcType="BIGINT" />
+    <result column="Long_number" property="longNumber" jdbcType="VARCHAR" />
+    <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+    <result column="dept_number" property="deptNumber" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="dept_level" property="deptLevel" jdbcType="BIGINT" />
+    <result column="display_name" property="displayName" jdbcType="VARCHAR" />
+    <result column="is_leaf" property="isLeaf" jdbcType="BIGINT" />
+    <result column="dept_state" property="deptState" jdbcType="BIGINT" />
+    <result column="admin_identity" property="adminIdentity" jdbcType="BIGINT" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="BIGINT" />
+    <result column="is_biz_org" property="isBizOrg" jdbcType="BIGINT" />
+    <result column="biz_code" property="bizCode" jdbcType="VARCHAR" />
+    <result column="seq" property="seq" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="BIGINT" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_update_user_id" property="lastUpdateUserId" jdbcType="BIGINT" />
+    <result column="last_updated_time" property="lastUpdatedTime" jdbcType="TIMESTAMP" />
+    <result column="ctrl_unit_id" property="ctrlUnitId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dept_id, Long_number, dept_name, dept_number, parent_id, dept_level, display_name, 
+    is_leaf, dept_state, admin_identity, address, tel, is_biz_org, biz_code, seq, description, 
+    creator_id, create_time, last_update_user_id, last_updated_time, ctrl_unit_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jiuling.web.model.SysDeptExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dept
+    where dept_id = #{deptId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select d.dept_number,d.dept_name from sys_dept d
+		join sys_user u on d.dept_number = u.dept_id
+    where u.user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_dept
+    where dept_id = #{deptId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jiuling.web.model.SysDeptExample" >
+    delete from sys_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jiuling.web.model.SysDept" >
+    insert into sys_dept (dept_id, Long_number, dept_name, 
+      dept_number, parent_id, dept_level, 
+      display_name, is_leaf, dept_state, 
+      admin_identity, address, tel, 
+      is_biz_org, biz_code, seq, 
+      description, creator_id, create_time, 
+      last_update_user_id, last_updated_time, ctrl_unit_id
+      )
+    values (#{deptId,jdbcType=BIGINT}, #{longNumber,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, 
+      #{deptNumber,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{deptLevel,jdbcType=BIGINT}, 
+      #{displayName,jdbcType=VARCHAR}, #{isLeaf,jdbcType=BIGINT}, #{deptState,jdbcType=BIGINT}, 
+      #{adminIdentity,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, #{tel,jdbcType=BIGINT}, 
+      #{isBizOrg,jdbcType=BIGINT}, #{bizCode,jdbcType=VARCHAR}, #{seq,jdbcType=BIGINT}, 
+      #{description,jdbcType=BIGINT}, #{creatorId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdateUserId,jdbcType=BIGINT}, #{lastUpdatedTime,jdbcType=TIMESTAMP}, #{ctrlUnitId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiuling.web.model.SysDept" >
+    insert into sys_dept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+      <if test="longNumber != null" >
+        Long_number,
+      </if>
+      <if test="deptName != null" >
+        dept_name,
+      </if>
+      <if test="deptNumber != null" >
+        dept_number,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="deptLevel != null" >
+        dept_level,
+      </if>
+      <if test="displayName != null" >
+        display_name,
+      </if>
+      <if test="isLeaf != null" >
+        is_leaf,
+      </if>
+      <if test="deptState != null" >
+        dept_state,
+      </if>
+      <if test="adminIdentity != null" >
+        admin_identity,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="isBizOrg != null" >
+        is_biz_org,
+      </if>
+      <if test="bizCode != null" >
+        biz_code,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastUpdateUserId != null" >
+        last_update_user_id,
+      </if>
+      <if test="lastUpdatedTime != null" >
+        last_updated_time,
+      </if>
+      <if test="ctrlUnitId != null" >
+        ctrl_unit_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deptId != null" >
+        #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="longNumber != null" >
+        #{longNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null" >
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptNumber != null" >
+        #{deptNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="deptLevel != null" >
+        #{deptLevel,jdbcType=BIGINT},
+      </if>
+      <if test="displayName != null" >
+        #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeaf != null" >
+        #{isLeaf,jdbcType=BIGINT},
+      </if>
+      <if test="deptState != null" >
+        #{deptState,jdbcType=BIGINT},
+      </if>
+      <if test="adminIdentity != null" >
+        #{adminIdentity,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=BIGINT},
+      </if>
+      <if test="isBizOrg != null" >
+        #{isBizOrg,jdbcType=BIGINT},
+      </if>
+      <if test="bizCode != null" >
+        #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null" >
+        #{lastUpdateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdatedTime != null" >
+        #{lastUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctrlUnitId != null" >
+        #{ctrlUnitId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jiuling.web.model.SysDeptExample" resultType="java.lang.Integer" >
+    select count(*) from sys_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_dept
+    <set >
+      <if test="record.deptId != null" >
+        dept_id = #{record.deptId,jdbcType=BIGINT},
+      </if>
+      <if test="record.longNumber != null" >
+        Long_number = #{record.longNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptName != null" >
+        dept_name = #{record.deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptNumber != null" >
+        dept_number = #{record.deptNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.deptLevel != null" >
+        dept_level = #{record.deptLevel,jdbcType=BIGINT},
+      </if>
+      <if test="record.displayName != null" >
+        display_name = #{record.displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLeaf != null" >
+        is_leaf = #{record.isLeaf,jdbcType=BIGINT},
+      </if>
+      <if test="record.deptState != null" >
+        dept_state = #{record.deptState,jdbcType=BIGINT},
+      </if>
+      <if test="record.adminIdentity != null" >
+        admin_identity = #{record.adminIdentity,jdbcType=BIGINT},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=BIGINT},
+      </if>
+      <if test="record.isBizOrg != null" >
+        is_biz_org = #{record.isBizOrg,jdbcType=BIGINT},
+      </if>
+      <if test="record.bizCode != null" >
+        biz_code = #{record.bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seq != null" >
+        seq = #{record.seq,jdbcType=BIGINT},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=BIGINT},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateUserId != null" >
+        last_update_user_id = #{record.lastUpdateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastUpdatedTime != null" >
+        last_updated_time = #{record.lastUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ctrlUnitId != null" >
+        ctrl_unit_id = #{record.ctrlUnitId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_dept
+    set dept_id = #{record.deptId,jdbcType=BIGINT},
+      Long_number = #{record.longNumber,jdbcType=VARCHAR},
+      dept_name = #{record.deptName,jdbcType=VARCHAR},
+      dept_number = #{record.deptNumber,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=BIGINT},
+      dept_level = #{record.deptLevel,jdbcType=BIGINT},
+      display_name = #{record.displayName,jdbcType=VARCHAR},
+      is_leaf = #{record.isLeaf,jdbcType=BIGINT},
+      dept_state = #{record.deptState,jdbcType=BIGINT},
+      admin_identity = #{record.adminIdentity,jdbcType=BIGINT},
+      address = #{record.address,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=BIGINT},
+      is_biz_org = #{record.isBizOrg,jdbcType=BIGINT},
+      biz_code = #{record.bizCode,jdbcType=VARCHAR},
+      seq = #{record.seq,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=BIGINT},
+      creator_id = #{record.creatorId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      last_update_user_id = #{record.lastUpdateUserId,jdbcType=BIGINT},
+      last_updated_time = #{record.lastUpdatedTime,jdbcType=TIMESTAMP},
+      ctrl_unit_id = #{record.ctrlUnitId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiuling.web.model.SysDept" >
+    update sys_dept
+    <set >
+      <if test="longNumber != null" >
+        Long_number = #{longNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null" >
+        dept_name = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptNumber != null" >
+        dept_number = #{deptNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="deptLevel != null" >
+        dept_level = #{deptLevel,jdbcType=BIGINT},
+      </if>
+      <if test="displayName != null" >
+        display_name = #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeaf != null" >
+        is_leaf = #{isLeaf,jdbcType=BIGINT},
+      </if>
+      <if test="deptState != null" >
+        dept_state = #{deptState,jdbcType=BIGINT},
+      </if>
+      <if test="adminIdentity != null" >
+        admin_identity = #{adminIdentity,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=BIGINT},
+      </if>
+      <if test="isBizOrg != null" >
+        is_biz_org = #{isBizOrg,jdbcType=BIGINT},
+      </if>
+      <if test="bizCode != null" >
+        biz_code = #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null" >
+        last_update_user_id = #{lastUpdateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdatedTime != null" >
+        last_updated_time = #{lastUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctrlUnitId != null" >
+        ctrl_unit_id = #{ctrlUnitId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dept_id = #{deptId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiuling.web.model.SysDept" >
+    update sys_dept
+    set Long_number = #{longNumber,jdbcType=VARCHAR},
+      dept_name = #{deptName,jdbcType=VARCHAR},
+      dept_number = #{deptNumber,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      dept_level = #{deptLevel,jdbcType=BIGINT},
+      display_name = #{displayName,jdbcType=VARCHAR},
+      is_leaf = #{isLeaf,jdbcType=BIGINT},
+      dept_state = #{deptState,jdbcType=BIGINT},
+      admin_identity = #{adminIdentity,jdbcType=BIGINT},
+      address = #{address,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=BIGINT},
+      is_biz_org = #{isBizOrg,jdbcType=BIGINT},
+      biz_code = #{bizCode,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=BIGINT},
+      description = #{description,jdbcType=BIGINT},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_user_id = #{lastUpdateUserId,jdbcType=BIGINT},
+      last_updated_time = #{lastUpdatedTime,jdbcType=TIMESTAMP},
+      ctrl_unit_id = #{ctrlUnitId,jdbcType=VARCHAR}
+    where dept_id = #{deptId,jdbcType=BIGINT}
+  </update>
+  <!--查询子部门-->
+   <select id="selectChildren" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_DEPT
+    START WITH dept_id = #{deptId,jdbcType=DECIMAL}
+    CONNECT BY PRIOR dept_id=PARENT_ID
+  </select>
+</mapper>

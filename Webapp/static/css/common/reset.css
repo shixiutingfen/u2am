@@ -1,0 +1,92 @@
+@charset "utf-8";
+/* CSS Document  reset style.css*/ 
+/*************************************
+***********start index**********
+**************************/
+a:hover, a:focus {
+    color: #1899e2;
+}
+.header .navbar {
+     margin-bottom: 0px; 
+}
+.task_leftSearch>a{
+	top: 6px;
+    border-left: 1px solid #ccc;
+    padding-left: 9px;
+    padding-top: 2px;
+    height: 28px;
+}
+.task_leftSearch>a>i{
+    color: #1899e2;
+}
+.task_nav ul li.on a, .task_nav ul li a:hover {
+    color: #019df1;
+    background-color: #2d3d4a;
+    padding-left: 20px;
+}
+.task_nav>ul li a span{
+	font-size: 14px;
+}
+.task_nav>ul li.on a span, .task_nav>ul li a:hover span{
+	font-size: 16px;
+}
+.task_nav ul li a{
+	color:#fff;
+	 padding-left: 20px;
+}
+.task_nav ul li .task_sub {
+	color:#fff;
+	font-size:12px;
+	margin-left:0px;
+   padding-left: 35px;
+   padding-top:5px;
+    /*background-color: #364653;*/
+    /*height: 115px;*/
+}
+.task_sub p{
+	margin-bottom:12px;
+}
+.task_nav ul li ul{
+	border-left:none;
+}
+.task_nav ul li ul li {
+    height: 30px;
+}
+.task_nav ul li.on a, .task_nav ul li a:hover{
+	background:none;
+}
+.task_nav ul li.on .task_sub{
+	display:block;
+}
+.task_nav ul li.on ul li.on a span{
+	margin-left:0px;
+}
+/*************************************
+***********end index**********
+**************************/
+/*image query*/
+.cs_wrapper{
+	margin:0px;
+}
+/*分页 page*/
+.pagination > li > a, .pagination > li > span {
+    padding: 0px 8px;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #2eb6ff;
+    border-color: #2eb6ff;
+}
+/*弹出框*/
+.layui-layer-title{
+	color:#fff;
+	background-color:#19a7f3;
+}
+
+::-ms-clear,
+::-ms-reveal
+{
+display:none;
+		}

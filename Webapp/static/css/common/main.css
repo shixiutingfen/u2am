@@ -1,0 +1,120 @@
+@charset "utf-8";
+/* CSS Document */ 
+/*************************
+***********start copy of main.jsp style**********
+**************************/
+.fl{float:left;}
+   .fr{float:right;}
+   	#searchForm label{color:#4d5d70;}
+   /*	.content-l{width:80%;}*/
+   	.content-r{margin-top:15px;background:#fff;float:left;}
+   	.content-r .title-info{color:#00acac;font-size:18px;background:#fff;width:90%;border-bottom:1px solid #00acac;margin:0 auto;height:44px;}
+   	.content-r .panel-body div{line-height:2em;}
+   	.content-r .panel-body .text-right{color:#4d5d70;}
+   	.colum-liu{height:124px;border-radius:5px;margin:8px 0;}
+   	.colum-liu img{margin:10px 0 0 8px;float:left;}
+   	.colum-liu ul{float:left;margin-left:8px;margin-top:5px;}
+   	.colum-liu ul li{white-space:nowrap;word-wrap:normal;text-overflow:ellipsis;overflow:hidden;height:17px;}
+   	.colum-liu ul li i{color:#00acac;margin-right:3px;}
+   	.check-more{color:#00acac;float:right;margin-right:10px;padding-bottom:10px;}
+   	.map-dot{margin:10px 0 0 33px;}
+   	.search-box{width:296px;height:34px;background:#fff;position:absolute;top:30px;left:50px;border:1px solid #eee;}
+   	.search-box input{border:0 none;margin:6px 0 0 15px;font-size:16px;}
+   	.search-box i{position:absolute;top:8px;right:10px;font-size:18px;color:#00acac;cursor:pointer;}
+   	#lawcaseform form-group label{color:#666;}
+   	
+   	.lawcase_handle_li span, .lawcase_handle_li a {font-size: 20px;}
+	#searchForm label{font-weight:normal;color:#4d5d70;}
+	td,th{color:#4d5d70;}
+	.ui-jqgrid tr.ui-row-ltr td{padding: 14px 10px;}
+	.ui-jqgrid tr.ui-row-ltr td.archive_operation{padding:10px 10px;}
+	#jqgh_caseList_recieveCode,#jqgh_caseList_realName,#jqgh_caseList_caseName,#jqgh_caseList_propertyValue,#jqgh_caseList_createTimeStr,#jqgh_caseList_verifyingStatus2,#jqgh_caseList_createName,#jqgh_caseList_act{color:#4d5d70;font-weight:normal;}
+	/*.ui-jqgrid .ui-jqgrid-labels{border:0 none;}*/
+	#grid-pager{border:0 none !important;background:#fff !important;}
+	.ui-jqgrid-hbox{border-top:2px solid #509edc;}
+	.input-group .form-control:first-child{height:30px;border-radius:3px;}
+	.ztitle{font-size:18px;color:#00acac;margin-top:10px;margin-left:20px;}
+	.search_panel_body{padding:10px 15px;position: relative;background:#eff6fc;overflow:hidden;}
+	.search_panel_body .row{margin:0;}
+	.handle_btn_group{position: absolute;right: 0px;text-align: center;top: 0px;}
+	.handle_btn_group .btn{margin-right:5px;}
+	.form_datetime{width:100%;}
+	.advanced_search_group{margin-top:5px;display:none;position:fixed;padding:10px 0 15px;background-color:#eff6fc;width:80%;}
+/*************************
+***********end  copy of main.jsp style**********
+**************************/
+
+/*************************
+***********start 修改main.jsp 细节**********
+**************************/
+.notice-box-wrap{
+	margin: 0 15px;
+}
+.content-r{
+	width:370px;
+	padding: 10px 0px;
+}
+.table-responsive{
+	margin: 10px;
+}
+.table-responsive .table-responsive{
+	/*padding: 10px 15px 15px; */
+}
+.search_panel_body .advanced_search_group{
+	padding-top: 0px;
+    margin-top: 15px;
+}
+.ztitle{
+	font-size: 16px;
+}
+.content-r .title-info{
+	font-size: 16px;
+}
+.content-r .panel-body .text-left{
+	padding-left:0px;
+	overflow: hidden; /*自动隐藏文字*/
+    text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+    white-space: nowrap;/*强制不换行*/
+    
+}
+.panel-caseclue .panel-body{
+	padding:0px 15px;
+}
+.panel-casedetailinfo{
+	margin-bottom:8px;
+}
+#searchForm label.col-md-1 {
+    padding-left:0px;
+    padding-right:0px;
+    width:auto;
+}
+.nav-tabs{
+	border-bottom:none;
+}
+.search_panel_body  .advanced_search_group {
+    left: 16px;
+    padding: 10px 15px 15px;
+    margin-top:0px;
+    z-index: 11;
+}
+.advanced_search_group .col-md-2{
+	margin-right:20px;
+}
+/*************************
+***********end 修改main.jsp 细节**********
+**************************/
+/*start change page color style*/
+.content-r .title-info {
+    color: #509edc;
+    border-bottom-color:  #509edc;
+}
+.ui-jqgrid-hbox {
+    border-top: 2px solid #555555;
+}
+.ztitle {
+    color: #509edc;
+}
+.colum-liu ul li i {
+    color: #509edc;
+}
+/*end change page color style*/

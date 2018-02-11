@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiuling.web.dao.ModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.jiuling.web.model.Module" >
+    <id column="module_id" property="moduleId" jdbcType="BIGINT" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="module_url" property="moduleUrl" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="is_visible" property="isVisible" jdbcType="VARCHAR" />
+    <result column="actions" property="actions" jdbcType="VARCHAR" />
+    <result column="long_number" property="longNumber" jdbcType="VARCHAR" />
+    <result column="module_level" property="moduleLevel" jdbcType="BIGINT" />
+    <result column="display_name" property="displayName" jdbcType="VARCHAR" />
+    <result column="leaf" property="leaf" jdbcType="BIGINT" />
+    <result column="seq" property="seq" jdbcType="BIGINT" />
+    <result column="module_name" property="moduleName" jdbcType="VARCHAR" />
+    <result column="module_number" property="moduleNumber" jdbcType="VARCHAR" />
+    <result column="module_description" property="moduleDescription" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_update_user_id" property="lastUpdateUserId" jdbcType="BIGINT" />
+    <result column="last_updated_time" property="lastUpdatedTime" jdbcType="TIMESTAMP" />
+    <result column="ctrl_unit_id" property="ctrlUnitId" jdbcType="VARCHAR" />
+    <result column="module_icon" property="moduleIcon" jdbcType="VARCHAR" />
+    <result column="is_dsiplay" property="isDsiplay" jdbcType="VARCHAR" />
+    <result column="display_order" property="displayOrder" jdbcType="BIGINT" />
+    <result column="info1" property="info1" jdbcType="VARCHAR" />
+    <result column="info2" property="info2" jdbcType="VARCHAR" />
+    <result column="info3" property="info3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    module_id, parent_id, module_url, state, is_visible, actions, long_number, module_level, 
+    display_name, leaf, seq, module_name, module_number, module_description, creator_id, 
+    create_time, last_update_user_id, last_updated_time, ctrl_unit_id, module_icon, is_dsiplay, 
+    display_order, info1, info2, info3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jiuling.web.model.ModuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_module
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <select id="selectSeqByExample" resultType="java.lang.Integer" parameterType="com.jiuling.web.model.ModuleExample" >
+		SELECT
+		IFNULL(Max(sys_module.seq),0)
+		FROM
+		sys_module
+		<if test="_parameter != null" >
+      		<include refid="Example_Where_Clause" />
+    	</if>
+  </select>
+	
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_module
+    where module_id = #{moduleId,jdbcType=BIGINT} 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_module
+    where module_id = #{moduleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jiuling.web.model.ModuleExample" >
+    delete from sys_module
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jiuling.web.model.Module" >
+    insert into sys_module (module_id, parent_id, module_url, 
+      state, is_visible, actions, 
+      long_number, module_level, display_name, 
+      leaf, seq, module_name, 
+      module_number, module_description, creator_id, 
+      create_time, last_update_user_id, last_updated_time, 
+      ctrl_unit_id, module_icon, is_dsiplay, 
+      display_order, info1, info2, 
+      info3)
+    values (#{moduleId,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{moduleUrl,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{isVisible,jdbcType=VARCHAR}, #{actions,jdbcType=VARCHAR}, 
+      #{longNumber,jdbcType=VARCHAR}, #{moduleLevel,jdbcType=BIGINT}, #{displayName,jdbcType=VARCHAR}, 
+      #{leaf,jdbcType=BIGINT}, #{seq,jdbcType=BIGINT}, #{moduleName,jdbcType=VARCHAR}, 
+      #{moduleNumber,jdbcType=VARCHAR}, #{moduleDescription,jdbcType=VARCHAR}, #{creatorId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateUserId,jdbcType=BIGINT}, #{lastUpdatedTime,jdbcType=TIMESTAMP}, 
+      #{ctrlUnitId,jdbcType=VARCHAR}, #{moduleIcon,jdbcType=VARCHAR}, #{isDsiplay,jdbcType=VARCHAR}, 
+      #{displayOrder,jdbcType=BIGINT}, #{info1,jdbcType=VARCHAR}, #{info2,jdbcType=VARCHAR}, 
+      #{info3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiuling.web.model.Module" >
+    insert into sys_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="moduleId != null" >
+        module_id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="moduleUrl != null" >
+        module_url,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="isVisible != null" >
+        is_visible,
+      </if>
+      <if test="actions != null" >
+        actions,
+      </if>
+      <if test="longNumber != null" >
+        long_number,
+      </if>
+      <if test="moduleLevel != null" >
+        module_level,
+      </if>
+      <if test="displayName != null" >
+        display_name,
+      </if>
+      <if test="leaf != null" >
+        leaf,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="moduleName != null" >
+        module_name,
+      </if>
+      <if test="moduleNumber != null" >
+        module_number,
+      </if>
+      <if test="moduleDescription != null" >
+        module_description,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastUpdateUserId != null" >
+        last_update_user_id,
+      </if>
+      <if test="lastUpdatedTime != null" >
+        last_updated_time,
+      </if>
+      <if test="ctrlUnitId != null" >
+        ctrl_unit_id,
+      </if>
+      <if test="moduleIcon != null" >
+        module_icon,
+      </if>
+      <if test="isDsiplay != null" >
+        is_dsiplay,
+      </if>
+      <if test="displayOrder != null" >
+        display_order,
+      </if>
+      <if test="info1 != null" >
+        info1,
+      </if>
+      <if test="info2 != null" >
+        info2,
+      </if>
+      <if test="info3 != null" >
+        info3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="moduleId != null" >
+        #{moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleUrl != null" >
+        #{moduleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="isVisible != null" >
+        #{isVisible,jdbcType=VARCHAR},
+      </if>
+      <if test="actions != null" >
+        #{actions,jdbcType=VARCHAR},
+      </if>
+      <if test="longNumber != null" >
+        #{longNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleLevel != null" >
+        #{moduleLevel,jdbcType=BIGINT},
+      </if>
+      <if test="displayName != null" >
+        #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="leaf != null" >
+        #{leaf,jdbcType=BIGINT},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=BIGINT},
+      </if>
+      <if test="moduleName != null" >
+        #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleNumber != null" >
+        #{moduleNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleDescription != null" >
+        #{moduleDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null" >
+        #{lastUpdateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdatedTime != null" >
+        #{lastUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctrlUnitId != null" >
+        #{ctrlUnitId,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIcon != null" >
+        #{moduleIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="isDsiplay != null" >
+        #{isDsiplay,jdbcType=VARCHAR},
+      </if>
+      <if test="displayOrder != null" >
+        #{displayOrder,jdbcType=BIGINT},
+      </if>
+      <if test="info1 != null" >
+        #{info1,jdbcType=VARCHAR},
+      </if>
+      <if test="info2 != null" >
+        #{info2,jdbcType=VARCHAR},
+      </if>
+      <if test="info3 != null" >
+        #{info3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jiuling.web.model.ModuleExample" resultType="java.lang.Integer" >
+    select count(*) from sys_module
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_module
+    <set >
+      <if test="record.moduleId != null" >
+        module_id = #{record.moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.moduleUrl != null" >
+        module_url = #{record.moduleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isVisible != null" >
+        is_visible = #{record.isVisible,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actions != null" >
+        actions = #{record.actions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longNumber != null" >
+        long_number = #{record.longNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleLevel != null" >
+        module_level = #{record.moduleLevel,jdbcType=BIGINT},
+      </if>
+      <if test="record.displayName != null" >
+        display_name = #{record.displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leaf != null" >
+        leaf = #{record.leaf,jdbcType=BIGINT},
+      </if>
+      <if test="record.seq != null" >
+        seq = #{record.seq,jdbcType=BIGINT},
+      </if>
+      <if test="record.moduleName != null" >
+        module_name = #{record.moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleNumber != null" >
+        module_number = #{record.moduleNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleDescription != null" >
+        module_description = #{record.moduleDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateUserId != null" >
+        last_update_user_id = #{record.lastUpdateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastUpdatedTime != null" >
+        last_updated_time = #{record.lastUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ctrlUnitId != null" >
+        ctrl_unit_id = #{record.ctrlUnitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleIcon != null" >
+        module_icon = #{record.moduleIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDsiplay != null" >
+        is_dsiplay = #{record.isDsiplay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displayOrder != null" >
+        display_order = #{record.displayOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.info1 != null" >
+        info1 = #{record.info1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.info2 != null" >
+        info2 = #{record.info2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.info3 != null" >
+        info3 = #{record.info3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_module
+    set module_id = #{record.moduleId,jdbcType=BIGINT},
+      parent_id = #{record.parentId,jdbcType=BIGINT},
+      module_url = #{record.moduleUrl,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      is_visible = #{record.isVisible,jdbcType=VARCHAR},
+      actions = #{record.actions,jdbcType=VARCHAR},
+      long_number = #{record.longNumber,jdbcType=VARCHAR},
+      module_level = #{record.moduleLevel,jdbcType=BIGINT},
+      display_name = #{record.displayName,jdbcType=VARCHAR},
+      leaf = #{record.leaf,jdbcType=BIGINT},
+      seq = #{record.seq,jdbcType=BIGINT},
+      module_name = #{record.moduleName,jdbcType=VARCHAR},
+      module_number = #{record.moduleNumber,jdbcType=VARCHAR},
+      module_description = #{record.moduleDescription,jdbcType=VARCHAR},
+      creator_id = #{record.creatorId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      last_update_user_id = #{record.lastUpdateUserId,jdbcType=BIGINT},
+      last_updated_time = #{record.lastUpdatedTime,jdbcType=TIMESTAMP},
+      ctrl_unit_id = #{record.ctrlUnitId,jdbcType=VARCHAR},
+      module_icon = #{record.moduleIcon,jdbcType=VARCHAR},
+      is_dsiplay = #{record.isDsiplay,jdbcType=VARCHAR},
+      display_order = #{record.displayOrder,jdbcType=BIGINT},
+      info1 = #{record.info1,jdbcType=VARCHAR},
+      info2 = #{record.info2,jdbcType=VARCHAR},
+      info3 = #{record.info3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiuling.web.model.Module" >
+    update sys_module
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleUrl != null" >
+        module_url = #{moduleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="isVisible != null" >
+        is_visible = #{isVisible,jdbcType=VARCHAR},
+      </if>
+      <if test="actions != null" >
+        actions = #{actions,jdbcType=VARCHAR},
+      </if>
+      <if test="longNumber != null" >
+        long_number = #{longNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleLevel != null" >
+        module_level = #{moduleLevel,jdbcType=BIGINT},
+      </if>
+      <if test="displayName != null" >
+        display_name = #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="leaf != null" >
+        leaf = #{leaf,jdbcType=BIGINT},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=BIGINT},
+      </if>
+      <if test="moduleName != null" >
+        module_name = #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleNumber != null" >
+        module_number = #{moduleNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleDescription != null" >
+        module_description = #{moduleDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null" >
+        last_update_user_id = #{lastUpdateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdatedTime != null" >
+        last_updated_time = #{lastUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctrlUnitId != null" >
+        ctrl_unit_id = #{ctrlUnitId,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIcon != null" >
+        module_icon = #{moduleIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="isDsiplay != null" >
+        is_dsiplay = #{isDsiplay,jdbcType=VARCHAR},
+      </if>
+      <if test="displayOrder != null" >
+        display_order = #{displayOrder,jdbcType=BIGINT},
+      </if>
+      <if test="info1 != null" >
+        info1 = #{info1,jdbcType=VARCHAR},
+      </if>
+      <if test="info2 != null" >
+        info2 = #{info2,jdbcType=VARCHAR},
+      </if>
+      <if test="info3 != null" >
+        info3 = #{info3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where module_id = #{moduleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiuling.web.model.Module" >
+    update sys_module
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      module_url = #{moduleUrl,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      is_visible = #{isVisible,jdbcType=VARCHAR},
+      actions = #{actions,jdbcType=VARCHAR},
+      long_number = #{longNumber,jdbcType=VARCHAR},
+      module_level = #{moduleLevel,jdbcType=BIGINT},
+      display_name = #{displayName,jdbcType=VARCHAR},
+      leaf = #{leaf,jdbcType=BIGINT},
+      seq = #{seq,jdbcType=BIGINT},
+      module_name = #{moduleName,jdbcType=VARCHAR},
+      module_number = #{moduleNumber,jdbcType=VARCHAR},
+      module_description = #{moduleDescription,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_user_id = #{lastUpdateUserId,jdbcType=BIGINT},
+      last_updated_time = #{lastUpdatedTime,jdbcType=TIMESTAMP},
+      ctrl_unit_id = #{ctrlUnitId,jdbcType=VARCHAR},
+      module_icon = #{moduleIcon,jdbcType=VARCHAR},
+      is_dsiplay = #{isDsiplay,jdbcType=VARCHAR},
+      display_order = #{displayOrder,jdbcType=BIGINT},
+      info1 = #{info1,jdbcType=VARCHAR},
+      info2 = #{info2,jdbcType=VARCHAR},
+      info3 = #{info3,jdbcType=VARCHAR}
+    where module_id = #{moduleId,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 获取最大级别菜单 -->
+  <select id="selectMaxModuleLevel" resultType="java.lang.Integer" >
+	select max(module_level) from sys_module
+  </select>
+  
+  <!-- 获取最大级别菜单 -->
+  <select id="selectDisplayMenu" resultType="com.jiuling.web.model.Module" >
+	select t.module_id   as moduleId,
+       t.module_url  as moduleUrl,
+       t.module_name as moduleName
+  	from sys_module t
+ 	where t.is_dsisplay = 'Y'
+ 	order by t.DISPLAY_ORDER ASC
+  </select>
+</mapper>

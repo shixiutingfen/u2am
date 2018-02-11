@@ -1,0 +1,15 @@
+/appftpserver.properties
+/application.properties
+/applicationContext-shiro.xml
+/applicationContext.xml
+/com/
+/ehcache-shiro.xml
+/ehcache.xml
+/generatorConfig.xml
+/log4j.properties
+/messages.properties
+/messages_en_US.properties
+/messages_zh_CN.properties
+/mybatis-config.xml
+/output.json
+/spring-mvc.xml
