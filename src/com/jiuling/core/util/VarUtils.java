@@ -9,6 +9,7 @@ public class VarUtils {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	public void addDataByJson(String jsonStr){
 		String path = VarUtils.class.getClassLoader().getResource("output.json").getPath(); 
 		String s = JSONUtil.readJsonFile(path);
@@ -30,6 +31,7 @@ public class VarUtils {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	public void addBike(WeekArray personBikes,SqlExecutor executor){
 		for(int j=0;j<personBikes.getSize();j++){
 			Var personbike = personBikes.get(j+"");
@@ -106,6 +108,7 @@ public class VarUtils {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	public void addVehicle(WeekArray vehicles,SqlExecutor executor){
 		for(int i=0;i<vehicles.getSize();i++){
 			Var vehicle = vehicles.get(i+"");
